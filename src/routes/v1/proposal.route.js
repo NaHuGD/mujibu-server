@@ -1,5 +1,5 @@
 const express = require('express');
-// const auth = require('../../middlewares/auth');
+const auth = require('../../middlewares/auth');
 // const validate = require('../../middlewares/validate');
 const teamController = require('../../controllers/team.controller');
 const projectController = require('../../controllers/project.controller');
@@ -11,6 +11,7 @@ router
   .route('/')
   .get(proposalController.getProposal)
   .post(
+    auth('manageUsers'),
     teamController.postTeam,
     projectController.postProject,
     teamController.updateTeamProjectId,
