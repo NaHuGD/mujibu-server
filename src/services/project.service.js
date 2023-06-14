@@ -148,6 +148,17 @@ const getProjects = async (query) => {
   };
 };
 
+const getProjectById = async (projectId) => {
+  const data = await Project.findById(projectId);
+  if (!data) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'projectId not found');
+  }
+  return {
+    status: 'Success',
+    data,
+  };
+};
+
 const postFakeProjects = async (query) => {
   // /api/projects/fake?count=60
   // 生成count筆亂數 projects 資料
@@ -225,6 +236,7 @@ const createProject = async (userBody) => {
 
 module.exports = {
   getProjects,
+  getProjectById,
   postFakeProjects,
   queryProjectsHot,
   queryProjectsCarousel,
