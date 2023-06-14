@@ -19,7 +19,7 @@ const getProjects = {
   }),
 };
 
-const getProject = {
+const getProjectById = {
   params: Joi.object().keys({
     projectId: Joi.string().custom(objectId),
   }),
@@ -68,7 +68,7 @@ const deleteProject = {
 module.exports = {
   createProject,
   getProjects,
-  getProject,
+  getProjectById,
   updateProject,
   deleteProject,
 };

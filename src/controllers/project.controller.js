@@ -16,6 +16,12 @@ const getProjects = catchAsync(async (req, res) => {
   res.send(result);
 });
 
+const getProjectById = catchAsync(async (req, res) => {
+  const { projectId } = req.params;
+  const result = await projectService.getProjectById(projectId);
+  res.send(result);
+});
+
 const getHomeHot = catchAsync(async (req, res) => {
   const filter = { projectForm: '0' }; // 搜尋條件
   const options = {
@@ -80,6 +86,7 @@ const postProject = catchAsync(async (req, res, next) => {
 module.exports = {
   postFakeProjects,
   getProjects,
+  getProjectById,
   getHomeHot,
   getHomeCarousel,
   getHomePicks,
