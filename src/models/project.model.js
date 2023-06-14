@@ -335,7 +335,14 @@ projectSchema.virtual('currentAmountPercentage').get(function () {
 projectSchema.plugin(toJSON);
 projectSchema.plugin(paginate);
 // Add the toJSON plugin which also ensures to include the virtual properties
-projectSchema.set('toJSON', { virtuals: true });
+projectSchema.set('toJSON', {
+  virtuals: true,
+  transform: (doc, ret) => {
+    const transformed = { ...ret };
+    delete transformed.id;
+    return transformed;
+  },
+});
 
 projectSchema.statics.isProjectNameTaken = async function (projectName, excludeUserId) {
   const project = await this.findOne({ projectName, _id: { $ne: excludeUserId } });

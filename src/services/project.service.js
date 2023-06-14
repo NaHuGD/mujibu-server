@@ -149,7 +149,8 @@ const getProjects = async (query) => {
 };
 
 const getProjectById = async (projectId) => {
-  const data = await Project.findById(projectId);
+  // 移除get回傳__v欄位
+  const data = await Project.findById(projectId).select('-__v');
   if (!data) {
     throw new ApiError(httpStatus.NOT_FOUND, 'projectId not found');
   }
