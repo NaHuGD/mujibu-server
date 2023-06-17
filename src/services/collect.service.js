@@ -7,7 +7,12 @@ const { User } = require('../models');
 const transformUserCollectList = async (userId) => {
   try {
     const user = await User.findById(userId).populate('collects').exec();
-    const userCollects = user.collects;
+    const userCollects = await Promise.all(
+      user.collects.map(async (collect) => {
+        const result = await collect.populate('projectTeam').execPopulate();
+        return result;
+      })
+    );
     const total = userCollects.length;
 
     return { userCollects, total };
