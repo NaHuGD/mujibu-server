@@ -123,7 +123,7 @@ const userSchema = mongoose.Schema(
     },
     collects: {
       type: [mongoose.Schema.Types.ObjectId],
-      ref: 'Collect',
+      ref: 'Project',
     },
     isEmailVerified: {
       type: Boolean,
